@@ -65,11 +65,16 @@ a:visited {
 .greybg {
 	margin: 0 auto;
 	margin-bottom: 0;
-    width: 50%;
-    height: auto;
+	width: 50%;
+	height: auto;
 	display: block;
-    background-color: rgba(105,105,105,0.70) ;
-    border: 0;
+	background-color: rgba(105,105,105,0.70);
+	border-image-slice: 27 27 27 27 fill;
+	border-image-width: 20px 20px 20px 20px;
+	border-image-outset: 5px 5px 5px 5px;
+	border-image-repeat: repeat repeat; 
+	border-image-source: url(images/statuschecker/border-img.png);
+	/*border: 0;*/
 	opacity: 0.9;
 }
 
@@ -80,8 +85,8 @@ a:visited {
 
 #footer{
 	font-size:12px;
-	margin: 0 auto;
-	overflow: auto;	
+	/*margin: 0 auto;
+	overflow: auto;*/
 }
 
 .greenbg{

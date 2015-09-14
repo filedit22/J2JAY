@@ -105,6 +105,15 @@
 		}
 	}
 	
+	if(file_exists($absolute_cache_path."userstatus.txt")){
+		$filename = $absolute_cache_path."userstatus.txt";
+		$myfile = fopen($filename, "r");
+		$fileread = fread($myfile, filesize($filename));
+		fclose($myfile);
+		$userstatus = $fileread;
+	} else
+		die("Missing cache pls run performcheck.php!");
+	
 	if(file_exists($absolute_cache_path."lastcheck.txt")){
 		$filename = $absolute_cache_path."lastcheck.txt";
 		$myfile = fopen($filename, "r");
@@ -164,6 +173,10 @@
 				echo '<span style="color:green">online</span>!'; 
 			else
 				echo '<span style="color:red">offline</span>!'; 
+			
+			if($i == 0)
+				echo $userstatus;
+			
 			echo '</br></br> It\'s been online for: '; get_difference($lastonline); echo '.</br> Last checked: '; get_difference($lastcheck); echo ' ago.</br> These numbers are up to date as of '; echo $now2->format('Y-m-d H:i:s'); echo ' in GMT+2 '; if(date('I')) echo 'DST'; echo '</br>
 			</br>';
 	endfor;
@@ -171,15 +184,17 @@
 	echo '
 		<span style="display:none">10</span>
 	</div>
-	<br>
-	<br>
-	<br>
+	</br>
+	</br>
+	</br>
 	<div id="footer">
 		<div class="greybg">
+			</br>
 			This site is written by BigBrainAFK aka. 『 』 aka. DrVilla aka. MrArrigato aka. DocHosevoll aka. Fristermister.
 			</br>PRO-Logo and idea for the site is the shadowfied status checker.
 			</br>Copyright for the Pictures used go to their respective owners as I not created them!
 			</br> Check me out on <a href="https://github.com/BigBrainAFK/Statuschecker">GitHub</a>!
+			</br></br>
 		</div>
 	</div>
 	</body></html>';
