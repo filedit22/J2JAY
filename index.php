@@ -179,6 +179,7 @@
 			This site is written by BigBrainAFK aka. 『 』 aka. DrVilla aka. MrArrigato aka. DocHosevoll aka. Fristermister.
 			</br>PRO-Logo and idea for the site is the shadowfied status checker.
 			</br>Copyright for the Pictures used go to their respective owners as I not created them!
+			</br> Check me out on <a href="https://github.com/BigBrainAFK/Statuschecker">GitHub</a>!
 		</div>
 	</div>
 	</body></html>';
