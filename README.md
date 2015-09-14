@@ -8,3 +8,6 @@ How does all this work?
 - A Cron-Job runs performcheck.php(with your personal key as GET argument) at least every minute(lowest possible period in Cron)
 - The performcheck.php stores some infos in cache files
 - The index.php just access the cache files and wont send out more tcp traffic(no additional pings)
+
+
+Live Demo Website(has some features that aren stable yet): http://project-sato.net/statuschecker/
