@@ -4,6 +4,9 @@
 	
 	require_once("config.php");
 	
+	if($_GET["key"] != $key)
+		die("ERROR");
+	
 	function checkstatus($hostadress, $port = 80, $timeout = 2){
 		if($socket =@ fsockopen($hostadress, $port, $errno, $errstr, $timeout)) {
 			fclose($socket);
