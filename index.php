@@ -132,7 +132,8 @@
 	<div id="checkerlogo">
 	</div>
 	</br>
-	</br>';
+	</br>
+	<div class="greybg">';
 
 	for($i = 0; $i <= count($servers)-1; $i++):
 		if(file_exists($absolute_cache_path."server".$servers[$i]['id'].".txt")){
