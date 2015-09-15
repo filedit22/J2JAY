@@ -181,7 +181,7 @@
 
 		echo '</br></br> It\'s been ' . $status . ' for: ';
 		get_difference($lastonline);
-		echo '.</br> Last checked: ';
+		echo '</br> Last checked: ';
 		get_difference($lastcheck);
 		echo '</br> These numbers are up to date as of ';
 		echo $now2->format('Y-m-d H:i:s');
