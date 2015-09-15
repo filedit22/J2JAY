@@ -14,4 +14,7 @@
 	
 	//set a key so only your cronjob can run this file!
 	$key = "insertyourkeyhere";
+
+//enable/disable the "User Online" counter
+$onlinecounter = false;
 ?>

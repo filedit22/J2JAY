@@ -56,8 +56,8 @@ function checkstatus2($hostaddress, $port = 80, $timeout = 2, $incodecheck = fal
             return true;
         } else
             return false;
-    } else
-        return false;
+        } else
+            return false;
 }
 
 
@@ -130,9 +130,11 @@ function get_slot_state()
 	fwrite($myfile, $newtime->format('Y-m-d H:i:s'));
 	fclose($myfile);
 
-//update the user online count
-$filename = $absolute_cache_path . "userstatus.txt";
-$myfile = fopen($filename, "w");
-fwrite($myfile, get_slot_state());
-fclose($myfile);
+if ($onlinecounter) {
+    //update the user online count
+    $filename = $absolute_cache_path . "userstatus.txt";
+    $myfile = fopen($filename, "w");
+    fwrite($myfile, get_slot_state());
+    fclose($myfile);
+}
 ?>
