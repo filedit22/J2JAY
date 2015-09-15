@@ -11,3 +11,6 @@ How does all this work?
 
 
 Live Demo Website(may have more or less features): http://project-sato.net/statuschecker/
+
+Known Bugs:
+- Pro-Server and Website might get flagged as offline when they are "full" because PRO Server drops all connections when its full!
