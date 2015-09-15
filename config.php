@@ -2,7 +2,7 @@
 	//You can enter it manually of course
 	//example: $absolute_cache_path = "/httpdocs/statuschecker/";
 	//pls include a / at the end of the path if you type it manually
-//$absolute_cache_path = $_SERVER['DOCUMENT_ROOT']."/yoursubfolder";
+    //$absolute_cache_path = $_SERVER['DOCUMENT_ROOT']."/yoursubfolder";
 	$absolute_cache_path = $_SERVER['DOCUMENT_ROOT'];
 	
 	//just keep the arrays like that!
@@ -15,6 +15,6 @@
 	//set a key so only your cronjob can run this file!
 	$key = "insertyourkeyhere";
 
-//enable/disable the "User Online" counter
-$onlinecounter = false;
+    //enable/disable the "User Online" counter
+    $onlinecounter = false;
 ?>

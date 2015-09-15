@@ -2,7 +2,7 @@
     // error_reporting ( -1 );
     // ini_set ( 'display_errors', true ); 
 
-include("config.php");
+    include("config.php");
 	
 	class MyDateInterval extends DateInterval {
 		public
@@ -105,16 +105,16 @@ include("config.php");
 		}
 	}
 
-if ($onlinecounter) {
-    if (file_exists($absolute_cache_path . "userstatus.txt")) {
-        $filename = $absolute_cache_path . "userstatus.txt";
-        $myfile = fopen($filename, "r");
-        $fileread = fread($myfile, filesize($filename));
-        fclose($myfile);
-        $userstatus = $fileread;
-    } else
-        die("Missing cache pls run performcheck.php!");
-}
+    if ($onlinecounter) {
+        if (file_exists($absolute_cache_path . "userstatus.txt")) {
+            $filename = $absolute_cache_path . "userstatus.txt";
+            $myfile = fopen($filename, "r");
+            $fileread = fread($myfile, filesize($filename));
+            fclose($myfile);
+            $userstatus = $fileread;
+        } else
+            die("Missing cache pls run performcheck.php!");
+    }
 	
 	if(file_exists($absolute_cache_path."lastcheck.txt")){
 		$filename = $absolute_cache_path."lastcheck.txt";
