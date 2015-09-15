@@ -7,8 +7,8 @@
 	//just keep the arrays like that!
 	//do not include http:// and no / at the end!
 	$servers = array(
-		array("id" => 1, "serveradress" => "pokemon-revolution.net", "port" => 80, "timeout" => 30, "displayname" => "PRO Server"),
-		array("id" => 2, "serveradress" => "46.28.204.197", "port" => 80, "timeout" => 30, "displayname" => "PRO Website")
+		array("id" => 1, "serveradress" => "46.28.204.197", "port" => 80, "timeout" => 30, "displayname" => "PRO Server"),
+		array("id" => 2, "serveradress" => "pokemon-revolution.net", "port" => 80, "timeout" => 30, "displayname" => "PRO Website")
 	);
 	
 	//set a key so only your cronjob can run this file!
