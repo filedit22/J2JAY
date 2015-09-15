@@ -1,11 +1,11 @@
 <?php
-//we can leave this on as this will give us some infos when we might debug it! the cron-job wont see this xD
+    //we can leave this on as this will give us some infos when we might debug it! the cron-job wont see this xD
     error_reporting ( -1 );
     ini_set ( 'display_errors', true );
 
-include("config.php");
+    include("config.php");
 
-//no key no honey
+    //no key no honey
 	if($_GET["key"] != $key)
 		die("ERROR");
 
