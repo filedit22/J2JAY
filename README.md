@@ -10,4 +10,4 @@ How does all this work?
 - The index.php just access the cache files and wont send out more tcp traffic(no additional pings)
 
 
-Live Demo Website(has some features that aren stable yet): http://project-sato.net/statuschecker/
+Live Demo Website(may have more or less features): http://project-sato.net/statuschecker/
