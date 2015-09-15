@@ -72,26 +72,26 @@
 			echo "just now";
 		else{
 			if($time[5] != 0)
-				$nettogo = 5;
+				$needtogo = 5;
 			if($time[4] != 0)
-				$nettogo = 4;
+				$needtogo = 4;
 			if($time[3] != 0)
-				$nettogo = 3;
+				$needtogo = 3;
 			if($time[2] != 0)
-				$nettogo = 2;
+				$needtogo = 2;
 			if($time[1] != 0)
-				$nettogo = 1;
+				$needtogo = 1;
 			if($time[0] != 0)
-				$nettogo = 0;
-			
-			for($count = 5; $count >= $nettogo; $count--):
+				$needtogo = 0;
+
+			for ($count = 5; $count >= $needtogo; $count--):
 				if($count == 5)
 					if($time[$count] == 1)
-						$returnstring = $time[$count]." ".$names[$count];
+						$returnstring = $time[$count] . " " . $names[$count] . " ago.";
 					else if($time[$count] == 0)
-						$returnstring = "0 ".$name[$count];
+						$returnstring = "0 " . $name[$count] . " ago.";
 					else
-						$returnstring = $time[$count]." ".$name[$count];
+						$returnstring = $time[$count] . " " . $name[$count] . " ago.";
 				else
 					if($time[$count] == 1)
 						$returnstring = $time[$count]." ".$names[$count].", ".$returnstring;
@@ -176,8 +176,16 @@
 			
 			if($i == 0)
 				echo $userstatus;
-			
-			echo '</br></br> It\'s been online for: '; get_difference($lastonline); echo '.</br> Last checked: '; get_difference($lastcheck); echo ' ago.</br> These numbers are up to date as of '; echo $now2->format('Y-m-d H:i:s'); echo ' in GMT+2 '; if(date('I')) echo 'DST'; echo '</br>
+
+		echo '</br></br> It\'s been ' . $status . ' for: ';
+		get_difference($lastonline);
+		echo '.</br> Last checked: ';
+		get_difference($lastcheck);
+		echo '</br> These numbers are up to date as of ';
+		echo $now2->format('Y-m-d H:i:s');
+		echo ' in GMT+2 ';
+		if (date('I')) echo 'DST';
+		echo '</br>
 			</br>';
 	endfor;
 		
