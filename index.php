@@ -23,13 +23,13 @@
 				// Delimeter between units if there are only 2 units
 				// 3 hours and 2 minutes
 
-		public static function createFromDateInterval (DateInterval $interval) {
-			$obj = new self('PT0S');
-			foreach ($interval as $property => $value) {
-				$obj->$property = $value;
-			}
-			return $obj;
-		}
+        public static function createFromDateInterval (DateInterval $interval) {
+            $obj = new self('PT0S');
+            foreach ($interval as $property => $value) {
+                $obj->$property = $value;
+            }
+            return $obj;
+        }
 
 		public function formatWithoutZeroes () {
 			// Each argument may have only one % parameter

@@ -17,4 +17,7 @@
 
     //enable/disable the "User Online" counter
     $onlinecounter = false;
+
+    //set the checkmode to: 0 = server is online on successfully connection, 1 = server is online on connection refuse, 2 = server is online on timeout, 3 = server is online on both
+    $checkmode = 0;
 ?>

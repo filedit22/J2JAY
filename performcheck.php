@@ -54,8 +54,32 @@
                 }
 
                 return true;
-            } else
-                return false;
+            } else {
+                $null = null;
+                $write = $socket;
+                socket_select($null, $write, $null, 1);
+                foreach ($write as $port => $socket) {
+                    $desc = "$port/tcp";
+                    $errno = socket_get_option($socket, SOL_SOCKET, SO_ERROR);
+
+                    if ($errno == 0) {
+                        return true;
+                    } elseif ($errno == SOCKET_ECONNREFUSED) {
+                        if($checkmode == 1 || $checkmode == 3)
+                            return true;
+                        else
+                            return false;
+                    } elseif ($errno == SOCKET_ETIMEDOUT) {
+                        if($checkmode == 2 || $checkmode == 3)
+                            return true;
+                        else
+                            return false;
+                    } else {
+                        $errmsg = socket_strerror($errno);
+                        echo "$desc error $errmsg\n";
+                    }
+                }
+            }
         } else
             return false;
     }
@@ -70,12 +94,12 @@
         $pattern = "/Users Online\: (.*)\/(.*)/";
         preg_match($pattern, $html, $result);
 
-        $pattern = "/\<br\>Server Status\:\<br\> .*Server (.*)\<br\>/";
+        $pattern = "/\<br\>Server Status\:\<br\>(.*)\<br\>/";
         preg_match($pattern, $html, $result2);
 
 
         if (count($result) != 0)
-            return '</br>Benutzer online: ' . $result[1] . '/' . $result[2];
+            return '</br>Users Online: ' . $result[1] . '/' . $result[2];
         else if (count($result2) != 0)
             return '</br><span style="color:orange">Server might be down</span>!';
         else
