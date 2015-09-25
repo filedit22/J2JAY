@@ -95,7 +95,7 @@
             $since_on_diff = get_difference($lastseenonline, $timeout_format);
 
             if($since_on_diff) {
-                if ($since_on_diff >= $timeout_amount)
+                if ($since_on_diff >= $timeout_amount && get_slot_state("f") != true)
                     return false;
                 else
                     return true;
@@ -106,8 +106,10 @@
 
 
     //fetch the user online count from the website
-    function get_slot_state()
+    function get_slot_state($mode = "none")
     {
+        include("config.php");
+
         $address = "http://pokemon-revolution-online.net/";
         $html = file_get_contents($address);
 
@@ -118,12 +120,32 @@
         preg_match($pattern, $html, $result2);
 
 
-        if (count($result) != 0)
+        $filename = $absolute_cache_path . "userstatus.txt";
+        $myfile = fopen($filename, "r");
+        $fileread = fread($myfile, filesize($filename));
+        fclose($myfile);
+        $old_onlinecount = $fileread;
+
+        if (count($result) != 0) {
+            if ($old_onlinecount == $result[1] && $mode == "f") {
+                return true;
+            }
             return '</br>Users Online: ' . $result[1] . '/' . $result[2];
-        else if (count($result2) != 0)
+        } else if (count($result2) != 0)
             return '</br><span style="color:orange">Server might be down</span>!';
         else
             return '</br><span style="color:orange">Playercount unavailable because the website might be down</span>!';
+    }
+
+
+
+    //update the user count
+    if ($onlinecounter) {
+        //update the user online count
+        $filename = $absolute_cache_path . "userstatus.txt";
+        $myfile = fopen($filename, "w");
+        fwrite($myfile, get_slot_state());
+        fclose($myfile);
     }
 
     //loop through the server array and save the stats to a cache file
@@ -173,14 +195,6 @@
 	$newtime = new DateTime('now');
 	fwrite($myfile, $newtime->format('Y-m-d H:i:s'));
 	fclose($myfile);
-
-    if ($onlinecounter) {
-        //update the user online count
-        $filename = $absolute_cache_path . "userstatus.txt";
-        $myfile = fopen($filename, "w");
-        fwrite($myfile, get_slot_state());
-        fclose($myfile);
-    }
 
     echo "Done!";
 ?>
