@@ -4,6 +4,7 @@
     ini_set ( 'display_errors', true );
 
     include("config.php");
+    include("time_difference.php");
 
     //no key no honey
 	if($_GET["key"] != $key)
@@ -80,8 +81,27 @@
                     }
                 }
             }
-        } else
-            return false;
+        } else {
+            for ($i = 0; $i <= count($servers) - 1; $i++):
+                if ($servers[$i]['serveraddress'] == $hostaddress) {
+                    $filename = $absolute_cache_path . "servertime" . $servers[$i]['id'] . ".txt";
+                    $myfile = fopen($filename, "r");
+                    $fileread = fread($myfile, filesize($filename));
+                    fclose($myfile);
+                    $lastseenonline = date_create_from_format('Y-m-d H:i:s', $fileread);
+                }
+            endfor;
+
+            $since_on_diff = get_difference($lastseenonline, $timeout_format);
+
+            if($since_on_diff) {
+                if ($since_on_diff >= $timeout_amount)
+                    return false;
+                else
+                    return true;
+            } else
+                return false;
+        }
     }
 
 

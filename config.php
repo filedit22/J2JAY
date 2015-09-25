@@ -2,7 +2,7 @@
 	//You can enter it manually of course
 	//example: $absolute_cache_path = "/httpdocs/statuschecker/";
 	//pls include a / at the end of the path if you type it manually
-    //$absolute_cache_path = $_SERVER['DOCUMENT_ROOT']."/yoursubfolder";
+    //$absolute_cache_path = $_SERVER['DOCUMENT_ROOT']."/yoursubfolder/";
 	$absolute_cache_path = $_SERVER['DOCUMENT_ROOT'];
 	
 	//just keep the arrays like that!
@@ -20,4 +20,10 @@
 
     //set the checkmode to: 0 = server is online on successfully connection, 1 = server is online on connection refuse, 2 = server is online on timeout, 3 = server is online on both
     $checkmode = 0;
+
+    //lets add some timeout things so even if the server drops new incoming connections we can make a more or less accurate status
+    //standart php time format and just 1 format type so no hours AND minutes just minutes OR hours
+    $timeout_format = "m";
+    //and the amoutn of the selected format until it is considered offline
+    $timeout_amount = 30;
 ?>
