@@ -22,8 +22,8 @@
     $checkmode = 0;
 
     //lets add some timeout things so even if the server drops new incoming connections we can make a more or less accurate status
-    //standart php time format and just 1 format type so no hours AND minutes just minutes OR hours
+    //standard php time format and just 1 format type so no hours AND minutes just minutes OR hours
     $timeout_format = "m";
-    //and the amoutn of the selected format until it is considered offline
+    //and the amount of the selected format until it is considered offline
     $timeout_amount = 30;
 ?>
