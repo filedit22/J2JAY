@@ -82,26 +82,21 @@
             if($mode != "none"){
                 switch($mode) {
                     case "s":
-                        echo $time[5];
-                        return true;
+                        return (int)$time[5];
                     case "i":
-                        echo $time[4];
-                        return true;
+                        return (int)$time[4];
                     case "h":
-                        echo $time[3];
-                        return true;
+                        return (int)$time[3];
                     case "d":
-                        echo $time[2];
-                        return true;
+                        return (int)$time[2];
                     case "m":
-                        echo $time[1];
-                        return true;
+                        return (int)$time[1];
                     case "y":
-                        echo $time[0];
-                        return true;
+                        return (int)$time[0];
                     default:
                         return false;
                 }
+                return true;
             }
 
             for ($count = 5; $count >= $needtogo; $count--):
