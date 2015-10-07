@@ -13,7 +13,7 @@
             fclose($myfile);
             $userstatus = $fileread;
         } else
-            die("Missing cache pls run performcheck.php!");
+            die("Missing cache pls run performcheck.php with your key!");
     }
 	
 	if(file_exists($absolute_cache_path."lastcheck.txt")){
@@ -23,7 +23,7 @@
 		fclose($myfile);
 		$lastcheck = date_create_from_format('Y-m-d H:i:s', $fileread);
 	} else
-		die("Missing cache pls run performcheck.php!");
+		die("Missing cache pls run performcheck.php with your key!");
 	
 	$now2 = new DateTime('now');
 	
@@ -62,7 +62,7 @@
 			fclose($myfile);
 			$lastonline = date_create_from_format('Y-m-d H:i:s', $fileread);
 		} else
-			die("Missing cache pls run performcheck.php!");
+			die("Missing cache pls run performcheck.php with your key!");
 		
 		if($i == 0)
 			echo '</br><span style="display:none">1</span>';
