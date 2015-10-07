@@ -6,7 +6,7 @@
     include("time_difference.php");
 
     if ($onlinecounter) {
-        if (file_exists($absolute_cache_path . "userstatus.txt")) {
+        if (file_exists($absolute_cache_path . "userstatus.txt") && filesize($absolute_cache_path . "userstatus.txt") >= 1) {
             $filename = $absolute_cache_path . "userstatus.txt";
             $myfile = fopen($filename, "r");
             $fileread = fread($myfile, filesize($filename));
@@ -16,7 +16,7 @@
             die("Missing cache pls run performcheck.php!");
     }
 	
-	if(file_exists($absolute_cache_path."lastcheck.txt")){
+	if(file_exists($absolute_cache_path."lastcheck.txt") && filesize($absolute_cache_path . "lastcheck.txt") >= 1){
 		$filename = $absolute_cache_path."lastcheck.txt";
 		$myfile = fopen($filename, "r");
 		$fileread = fread($myfile, filesize($filename));
@@ -30,8 +30,7 @@
 	echo '<html><head>
 	<title>Pokémon Online Revolution Status Checker by BigBrainAFK</title>
 	<meta charset="UTF-8">
-	<meta content="a233bd814848cf0bc3ea" name="wot-verification"> 
-	<meta content="Server Status checker for Pokémon Revolution Online" name="description">
+	<meta content="Server Statuschecker for Pokémon Revolution Online" name="description">
 	<link media="all" href="style.css" type="text/css" rel="stylesheet">
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	</head> 
@@ -47,7 +46,7 @@
 	<div class="greybg">';
 
 	for($i = 0; $i <= count($servers)-1; $i++):
-		if(file_exists($absolute_cache_path."server".$servers[$i]['id'].".txt")){
+		if(file_exists($absolute_cache_path."server".$servers[$i]['id'].".txt") && filesize($absolute_cache_path . "server".$servers[$i]['id'].".txt") >= 1){
 			$filename = $absolute_cache_path."server".$servers[$i]['id'].".txt";
 			$myfile = fopen($filename, "r");
 			$fileread = fread($myfile, filesize($filename));
@@ -56,7 +55,7 @@
 		} else
 			die("Missing cache pls run performcheck.php!");
 		
-		if(file_exists($absolute_cache_path."servertime".$servers[$i]['id'].".txt")){
+		if(file_exists($absolute_cache_path."servertime".$servers[$i]['id'].".txt") && filesize($absolute_cache_path . "servertime".$servers[$i]['id'].".txt") >= 1){
 			$filename = $absolute_cache_path."servertime".$servers[$i]['id'].".txt";
 			$myfile = fopen($filename, "r");
 			$fileread = fread($myfile, filesize($filename));

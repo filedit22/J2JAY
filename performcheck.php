@@ -70,37 +70,53 @@
                             return true;
                         else
                             return false;
+//                            return timeout_check($hostaddress);
                     } elseif ($errno == SOCKET_ETIMEDOUT) {
                         if($checkmode == 2 || $checkmode == 3)
                             return true;
                         else
                             return false;
+//                            return timeout_check($hostaddress);
                     } else {
                         $errmsg = socket_strerror($errno);
                         echo "$desc error $errmsg\n";
                     }
                 }
-            }
-        } else {
-            for ($i = 0; $i <= count($servers) - 1; $i++):
-                if ($servers[$i]['serveraddress'] == $hostaddress) {
-                    $filename = $absolute_cache_path . "servertime" . $servers[$i]['id'] . ".txt";
-                    $myfile = fopen($filename, "r");
-                    $fileread = fread($myfile, filesize($filename));
-                    fclose($myfile);
-                    $lastseenonline = date_create_from_format('Y-m-d H:i:s', $fileread);
-                }
-            endfor;
-
-            $since_on_diff = get_difference($lastseenonline, $timeout_format);
-
-            if($since_on_diff) {
-                if ($since_on_diff >= $timeout_amount && get_slot_state("f") != true)
-                    return false;
-                else
-                    return true;
-            } else
                 return false;
+//                return timeout_check($hostaddress);
+            }
+        } else
+            return false;
+//            return timeout_check($hostaddress);
+    }
+
+    function timeout_check($hostaddress)
+    {
+        include("config.php");
+
+        for ($i = 0; $i <= count($servers) - 1; $i++):
+            if ($servers[$i]['serveraddress'] == $hostaddress) {
+                $filename = $absolute_cache_path . "servertime" . $servers[$i]['id'] . ".txt";
+                $myfile = fopen($filename, "r");
+                $fileread = fread($myfile, filesize($filename));
+                fclose($myfile);
+                $lastseenonline = date_create_from_format('Y-m-d H:i:s', $fileread);
+            }
+        endfor;
+        $since_on_diff = get_difference($lastseenonline, $timeout_format);
+        if(!isset($since_on_diff)){
+            echo "not set";
+            return true;
+        }
+        var_dump($since_on_diff);
+        var_dump($timeout_amount);
+        var_dump(get_slot_state("f"));
+        if (intval($since_on_diff) >= $timeout_amount && get_slot_state("f") == "same") {
+            echo "off";
+            return false;
+        }else {
+            echo "on";
+            return true;
         }
     }
 
@@ -127,25 +143,13 @@
         $old_onlinecount = $fileread;
 
         if (count($result) != 0) {
-            if ($old_onlinecount == $result[1] && $mode == "f") {
-                return true;
-            }
+            if ($old_onlinecount == $result[1] && $mode == "f")
+                return "same";
             return '</br>Users Online: ' . $result[1] . '/' . $result[2];
         } else if (count($result2) != 0)
             return '</br><span style="color:orange">Server might be down</span>!';
         else
             return '</br><span style="color:orange">Playercount unavailable because the website might be down</span>!';
-    }
-
-
-
-    //update the user count
-    if ($onlinecounter) {
-        //update the user online count
-        $filename = $absolute_cache_path . "userstatus.txt";
-        $myfile = fopen($filename, "w");
-        fwrite($myfile, get_slot_state());
-        fclose($myfile);
     }
 
     //loop through the server array and save the stats to a cache file
@@ -188,6 +192,14 @@
 			}
 		}
 	endfor;
+
+    //update the user count
+    if ($onlinecounter) {
+        $filename = $absolute_cache_path . "userstatus.txt";
+        $myfile = fopen($filename, "w");
+        fwrite($myfile, get_slot_state("none"));
+        fclose($myfile);
+    }
 
     //update the last check time
 	$filename = $absolute_cache_path."lastcheck.txt";
