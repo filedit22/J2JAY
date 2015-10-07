@@ -30,8 +30,7 @@
 	echo '<html><head>
 	<title>Pokémon Online Revolution Status Checker by BigBrainAFK</title>
 	<meta charset="UTF-8">
-	<meta content="a233bd814848cf0bc3ea" name="wot-verification"> 
-	<meta content="Server Status checker for Pokémon Revolution Online" name="description">
+	<meta content="Server Statuschecker for Pokémon Revolution Online" name="description">
 	<link media="all" href="style.css" type="text/css" rel="stylesheet">
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	</head> 
