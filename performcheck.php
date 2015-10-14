@@ -126,13 +126,13 @@
     {
         include("config.php");
 
-        $address = "http://pokemon-revolution-online.net/";
+        $address = "http://pokemon-revolution-online.net/ServerStatus.php";
         $html = file_get_contents($address);
 
         $pattern = "/Users Online\: (.*)\/(.*)/";
         preg_match($pattern, $html, $result);
 
-        $pattern = "/\<br\>Server Status\:\<br\>(.*)\<br\>/";
+        $pattern = "/Server (.*)/";
         preg_match($pattern, $html, $result2);
 
 
@@ -146,10 +146,21 @@
             if ($old_onlinecount == $result[1] && $mode == "f")
                 return "same";
             return '</br>Users Online: ' . $result[1] . '/' . $result[2];
-        } else if (count($result2) != 0)
-            return '</br><span style="color:orange">Server might be down</span>!';
-        else
+        } else if (count($result2) != 0) {
+            return '</br>Server Offline';
+            //return '</br><span style="color:orange">Server might be down</span>!';
+        } else
             return '</br><span style="color:orange">Playercount unavailable because the website might be down</span>!';
+    }
+
+
+
+    //update the user count
+    if ($onlinecounter) {
+        $filename = $absolute_cache_path . "userstatus.txt";
+        $myfile = fopen($filename, "w");
+        fwrite($myfile, get_slot_state("none"));
+        fclose($myfile);
     }
 
     //loop through the server array and save the stats to a cache file
@@ -162,6 +173,20 @@
 			$status = $fileread;
 		} else
             $status = "offline";
+
+        $filename = $absolute_cache_path . "userstatus.txt";
+        $myfile = fopen($filename, "r");
+        $fileread = fread($myfile, filesize($filename));
+        fclose($myfile);
+        $count_temp = $fileread;
+
+        $pattern = "/Users Online\: (.*)\/(.*)/";
+        preg_match($pattern, $count_temp, $result);
+
+        if(count($result) != 0)
+            $count = $result[1];
+        else
+            $count = -1;
 
         //some switcherino so it just updates the stats if the status changed
         if (checkstatus2($servers[$i]['serveraddress'], $servers[$i]['port'], $servers[$i]['timeout'], $servers[$i]['codecheck'], $servers[$i]['keyphrase'], $servers[$i]['keyphrase2'])) {
@@ -178,7 +203,7 @@
 				fclose($myfile);
 			}
 		} else {
-			if($status == "online"){
+			if($status == "online" && $count != -1 && $count <= 1440){
 				$filename = $absolute_cache_path."servertime".$servers[$i]['id'].".txt";
 				$myfile = fopen($filename, "w");
 				$newtime = new DateTime('now');
@@ -187,19 +212,44 @@
 				
 				$filename = $absolute_cache_path."server".$servers[$i]['id'].".txt";
 				$myfile = fopen($filename, "w");
-				fwrite($myfile, "offline");
+				fwrite($myfile, "online (timeout)");
 				fclose($myfile);
-			}
-		}
-	endfor;
+			} elseif($status == "online" && $count != -1 && $count > 1440){
+                $filename = $absolute_cache_path."servertime".$servers[$i]['id'].".txt";
+                $myfile = fopen($filename, "w");
+                $newtime = new DateTime('now');
+                fwrite($myfile, $newtime->format('Y-m-d H:i:s'));
+                fclose($myfile);
 
-    //update the user count
-    if ($onlinecounter) {
-        $filename = $absolute_cache_path . "userstatus.txt";
-        $myfile = fopen($filename, "w");
-        fwrite($myfile, get_slot_state("none"));
-        fclose($myfile);
-    }
+                $filename = $absolute_cache_path."server".$servers[$i]['id'].".txt";
+                $myfile = fopen($filename, "w");
+                fwrite($myfile, "online (full)");
+                fclose($myfile);
+            } elseif($status == "online" && $count == -1){
+                $filename = $absolute_cache_path."servertime".$servers[$i]['id'].".txt";
+                $myfile = fopen($filename, "w");
+                $newtime = new DateTime('now');
+                fwrite($myfile, $newtime->format('Y-m-d H:i:s'));
+                fclose($myfile);
+
+                $filename = $absolute_cache_path."server".$servers[$i]['id'].".txt";
+                $myfile = fopen($filename, "w");
+                fwrite($myfile, "offline");
+                fclose($myfile);
+            } else {
+                $filename = $absolute_cache_path."servertime".$servers[$i]['id'].".txt";
+                $myfile = fopen($filename, "w");
+                $newtime = new DateTime('now');
+                fwrite($myfile, $newtime->format('Y-m-d H:i:s'));
+                fclose($myfile);
+
+                $filename = $absolute_cache_path."server".$servers[$i]['id'].".txt";
+                $myfile = fopen($filename, "w");
+                fwrite($myfile, "offline");
+                fclose($myfile);
+            }
+        }
+	endfor;
 
     //update the last check time
 	$filename = $absolute_cache_path."lastcheck.txt";

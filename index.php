@@ -71,7 +71,11 @@
 			The '.$servers[$i]["displayname"].' is ';
 			
 			if($status == "online")
-				echo '<span style="color:green">online</span>!'; 
+				echo '<span style="color:green">online</span>!';
+            elseif($status == "online (full)")
+                echo '<span style="color:orange">online (full)</span>!';
+            elseif($status == "online (full)")
+                echo '<span style="color:darkorange">online (timeout)</span>!';
 			else
 				echo '<span style="color:red">offline</span>!';
 
