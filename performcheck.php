@@ -236,7 +236,7 @@
                 $myfile = fopen($filename, "w");
                 fwrite($myfile, "offline");
                 fclose($myfile);
-            } else {
+            } elseif($status == "online") {
                 $filename = $absolute_cache_path."servertime".$servers[$i]['id'].".txt";
                 $myfile = fopen($filename, "w");
                 $newtime = new DateTime('now');
