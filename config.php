@@ -9,7 +9,7 @@
     //do not include http:// and no / at the end!
     $servers = array(
         array("id" => 1, "serveraddress" => "46.28.204.197", "port" => 800, "timeout" => 30, "displayname" => "PRO Server", "codecheck" => false, "keyphrase" => "<html>", "keyphrase2" => "</html>"),
-        array("id" => 2, "serveraddress" => "pokemon-revolution.net", "port" => 80, "timeout" => 30, "displayname" => "PRO Website", "codecheck" => true, "keyphrase" => "2015 ", "keyphrase2" => "/Creatures")
+        array("id" => 2, "serveraddress" => "pokemon-revolution-online.net", "port" => 80, "timeout" => 30, "displayname" => "PRO Website", "codecheck" => true, "keyphrase" => "2015 ", "keyphrase2" => "/Creatures")
     );
 
     //set a key so only your cronjob can run this file!
